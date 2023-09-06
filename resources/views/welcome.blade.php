@@ -1,3 +1,3 @@
-    <x-app-layout class="antialiased">
+    <x-guest-layout class="antialiased">
         @include('partials/slider')
-    </x-app-layout>
+    </x-guest-layout>
