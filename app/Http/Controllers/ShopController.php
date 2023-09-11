@@ -9,6 +9,23 @@ class ShopController extends Controller
 {
     public function index()
     {
-        return View('shop.index');
+
     }
+    public function create()
+    {
+
+    }
+    public function edit()
+    {
+
+    }
+    public function update()
+    {
+
+    }
+    public function distroy()
+    {
+
+    }
+
 }
