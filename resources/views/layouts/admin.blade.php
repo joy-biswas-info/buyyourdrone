@@ -89,7 +89,17 @@
                     <!-- /.container-fluid -->
                 </section>
             @endif
-
+            <div class="container">
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @elseif (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
+            </div>
             <!-- Main content -->
             {{ $slot }}
         </div>
@@ -112,5 +122,13 @@
     <script src="{{ asset('admin/js/adminlte.min.js') }}"></script>
 
 </body>
+<script>
+    setTimeout(function() {
+        $('.alert.alert-success').fadeOut('slow');
+    }, 7000);
+    setTimeout(function() {
+        $('.alert.alert-danger').fadeOut('slow');
+    }, 7000);
+</script>
 
 </html>

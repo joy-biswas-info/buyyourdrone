@@ -3,11 +3,7 @@
         {{ __('Edit Sub category') }}
     </x-slot>
     <section class="content">
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
+
         <div class="container-fluid">
             <form action="{{ route('sub.category.update', $data->id) }}" method="POST">
                 @method('PUT')

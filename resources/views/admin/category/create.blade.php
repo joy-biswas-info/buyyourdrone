@@ -4,11 +4,7 @@
     </x-slot>
     <section class="content">
         <div class="container-fluid">
-            @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
+
             <form action={{ route('categories.create') }} method="POST">
                 @csrf
                 <div class="card">
@@ -75,9 +71,6 @@
 
 
     <script>
-        setTimeout(function() {
-            $('.alert.alert-success').fadeOut('slow');
-        }, 7000);
         document.getElementById('name').addEventListener('input', function() {
             const nameInput = this.value.trim();
             const slugInput = document.getElementById('slug');

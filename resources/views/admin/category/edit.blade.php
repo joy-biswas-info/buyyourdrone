@@ -4,15 +4,7 @@
     </x-slot>
     <section class="content">
         <div class="container-fluid">
-            @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @elseif (session('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
-            @endif
+
             <form action={{ route('category.update', $category->id) }} method="POST">
                 @method('PUT')
                 @csrf
