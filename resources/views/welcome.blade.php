@@ -1,3 +1,3 @@
     <x-guest-layout class="antialiased">
-        @include('partials/slider')
+        <h2>Home Page</h2>
     </x-guest-layout>

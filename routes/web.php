@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\TempImageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,6 +36,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/cart', [CartController::class, 'index'])->name('cart');
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    // Categories Routes 
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+    Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+    Route::post('/categories/create', [CategoryController::class, 'store'])->name('categories.create');
+    Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('category.update');
+    Route::delete('/categories/{category}', [CategoryController::class, 'distroy'])->name('category.delete');
+    Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+    Route::post('/upload-temp-image', [TempImageController::class, 'index'])->name('temp-images.create');
+
+    // ! Sub Categories 
+    Route::get('/sub-categories', [SubCategoryController::class, 'create'])->name('sub_category.index');
+
 });
 
 
