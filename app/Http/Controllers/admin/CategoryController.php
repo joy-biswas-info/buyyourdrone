@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\SubCategory;
 use App\Models\TempImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -16,13 +17,26 @@ class CategoryController extends Controller
     //! category List 
     public function index(Request $request)
     {
-        $categories = Category::latest();
+        $category = Category::latest('id');
+
+        // Filtering by keyword
         if (!empty($request->get('keyword'))) {
-            $categories = $categories->where('name', 'like', '%' . $request->get('keyword') . '%');
+            $category->where('name', 'like', '%' . $request->get('keyword') . '%');
         }
-        $categories = $categories->paginate(10);
-        return View('admin.category.list', [
-            'categories' => $categories
+
+        // Sorting logic
+        $sort = $request->input('sort', 'id');
+        $direction = $request->input('direction', 'asc');
+
+        $category->orderBy($sort, $direction);
+
+        // Paginate the results
+        $category = $category->paginate(10);
+
+        return view('admin.category.list', [
+            'data' => $category,
+            'sort' => $sort,
+            'direction' => $direction,
         ]);
     }
     // !Show Create Category
@@ -92,7 +106,7 @@ class CategoryController extends Controller
         }
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
-            'slug' => 'required',
+            'slug' => 'required|unique:categories,slug,' . $category->id . ',id',
             'status' => 'required',
         ]);
 
@@ -113,7 +127,6 @@ class CategoryController extends Controller
                 $sPath = public_path() . '/temp/' . $tempImage->name;
                 $dPath = public_path() . '/uploads/category/thumb/' . $newImageName;
                 $img = Image::make($sPath);
-                // $img->resize(400, 600);
                 $img->fit(450, 600, function ($constraint) {
                     $constraint->upsize();
                 });
@@ -140,6 +153,7 @@ class CategoryController extends Controller
         //! Get Old Image 
         $oldImage = $category->image;
         File::delete(public_path() . '/uploads/category/thumb/' . $oldImage);
+        $category->subcategories()->delete();
         $category->delete();
         return response()->json([
             'status' => true,

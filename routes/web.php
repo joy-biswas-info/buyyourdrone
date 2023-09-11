@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\SubCategoryController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShopController;
@@ -46,7 +47,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/upload-temp-image', [TempImageController::class, 'index'])->name('temp-images.create');
 
     // ! Sub Categories 
-    Route::get('/sub-categories', [SubCategoryController::class, 'create'])->name('sub_category.index');
+    Route::get('/subcategories', [SubCategoryController::class, 'index'])->name('sub.category.index');
+    Route::get('/subcategories/create', [SubCategoryController::class, 'create'])->name('sub.category.create');
+    Route::post('/subcategories/create', [SubCategoryController::class, 'store'])->name('sub.category.store');
+    Route::get('/subcategories/{subcategory}/edit', [SubCategoryController::class, 'edit'])->name('sub.category.edit');
+    Route::put('/subcategories/{subcategory}', [SubCategoryController::class, 'update'])->name('sub.category.update');
+    Route::delete('/subcategories/{subcategory}', [SubCategoryController::class, 'distroy'])->name('sub.category.delete');
 
 });
 
