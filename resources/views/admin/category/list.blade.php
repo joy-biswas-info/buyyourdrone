@@ -128,7 +128,6 @@
             </div>
             <div class="card-footer clearfix">
                 {{ $data->links() }}
-                {{-- {{ $data->appends(['keyword' => Request::get('keyword'), 'sort' => $sort, 'direction' => $direction])->links() }} --}}
             </div>
         </div>
     </section>
