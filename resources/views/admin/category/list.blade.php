@@ -120,7 +120,7 @@
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="5">There is no category</td>
+                                <td colspan="5">No record found</td>
                             </tr>
                         @endif
                     </tbody>

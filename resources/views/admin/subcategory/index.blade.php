@@ -70,7 +70,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if (!empty($data))
+                        @if ($data->isNotEmpty())
 
                             @foreach ($data as $subcategory)
                                 <tr>
@@ -131,7 +131,7 @@
                             @endforeach
                         @else
                             <tr>
-                                <p>No Sub Category</p>
+                                <td>No record found</td>
                             </tr>
                         @endif
 

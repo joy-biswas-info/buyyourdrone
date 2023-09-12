@@ -44,7 +44,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if (!empty($data))
+                            @if ($data->isNotEmpty())
                                 @foreach ($data as $brand)
                                     <tr>
                                         <td>{{ $brand->id }}</td>
@@ -99,6 +99,10 @@
                                         </td>
                                     </tr>
                                 @endforeach
+                            @else
+                                <tr>
+                                    <td> No record found</td>
+                                </tr>
                             @endif
 
 
